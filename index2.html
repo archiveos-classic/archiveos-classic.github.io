@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveOS | The Fan Made Project</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { cursor: url('1.gif'), auto !important; }
+        body { font-family: 'Quicksand', sans-serif; overflow: hidden; transition: background-color 0.3s; background: #000; }
+        .ba-gradient { background: linear-gradient(135deg, #2f60ad 0%, #4dabf7 100%); }
+        .campaign-btn { clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); }
+        .side-arrow { filter: drop-shadow(0 0 10px rgba(0,0,0,0.4)); transition: all 0.3s ease; cursor: url('1.gif'), pointer !important; }
+        .side-arrow:hover { transform: scale(1.2); color: #38bdf8; }
+        .bg-layer { position: absolute; inset: 0; background-image: url('background.webp'); background-size: cover; background-position: center; transform: scale(1.0); z-index: -1; filter: brightness(0.7); }
+        #bg-image { transition: opacity 0.5s ease-in-out, filter 0.5s; width: 100vw; height: 100vh; object-fit: contain; position: relative; z-index: 1; }
+        .theme-light .glass-ui { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.6); color: #1e293b; }
+        .theme-dark .glass-ui { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); color: #f1f5f9; }
+        .active-link { border-bottom: 5px solid #4dabf7; transform: translateY(-4px); background: rgba(77, 171, 247, 0.2); }
+        button, a { cursor: url('1.gif'), pointer !important; }
+        .logo-glow { filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)); }
+    </style>
+</head>
+<body class="theme-light h-screen w-screen relative overflow-hidden">
+
+    <audio id="bg-music" loop autoplay>
+        <source src="future-bossa.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="absolute inset-0 z-0 overflow-hidden bg-slate-900">
+        <div class="bg-layer"></div> <img id="bg-image" src="1.png" alt="Background">
+    </div>
+
+    <header class="absolute top-0 left-0 w-full z-40 p-6 flex justify-between items-center pointer-events-none">
+        <div class="glass-ui pointer-events-auto inline-flex rounded-lg border-l-8 border-sky-500 p-4 shadow-2xl items-center gap-4 scale-110 origin-left">
+            <div class="bg-sky-600 text-white px-3 py-1.5 rounded italic font-black text-base uppercase">Lv. 75</div>
+            <div id="version-display" class="font-bold uppercase tracking-tight text-lg">Sensei : Junko Sürümü</div>
+        </div>
+
+        <div class="flex gap-4 pointer-events-auto scale-110 origin-right">
+            <button onclick="openAbout()" class="glass-ui px-4 py-2 rounded-xl font-black shadow-lg hover:bg-sky-500 hover:text-white transition">ⓘ</button>
+            <button onclick="toggleMusic()" class="glass-ui px-4 py-2 rounded-xl font-black shadow-lg hover:bg-sky-100 transition"><span id="music-icon">🔊</span></button>
+            <button onclick="toggleTheme()" class="glass-ui px-4 py-2 rounded-xl font-black shadow-lg hover:scale-105 transition"><span id="theme-icon">🌙</span></button>
+            <button onclick="toggleLang()" id="lang-btn" class="glass-ui px-6 py-2 rounded-xl font-black shadow-lg hover:scale-105 transition border-b-4 border-sky-300">TR</button>
+        </div>
+    </header>
+
+    <div class="absolute top-12 left-1/2 -translate-x-1/2 z-40 flex gap-4 p-2 glass-ui rounded-3xl shadow-2xl scale-110">
+        <button onclick="setVersion('junko')" id="btn-junko" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90 active-link">
+            <span class="text-3xl">🍔</span><span class="text-[10px] font-black uppercase mt-1">Junko</span>
+        </button>
+        <button onclick="setVersion('standard')" id="btn-standard" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90">
+            <span class="text-3xl">☁️</span><span class="text-[10px] font-black uppercase mt-1">Std</span>
+        </button>
+        <button onclick="setVersion('gaming')" id="btn-gaming" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90">
+            <span class="text-3xl">🎮</span><span class="text-[10px] font-black uppercase mt-1">Game</span>
+        </button>
+        <button onclick="setVersion('lite')" id="btn-lite" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90">
+            <span class="text-3xl">🍃</span><span class="text-[10px] font-black uppercase mt-1">Lite</span>
+        </button>
+    </div>
+
+    <aside class="absolute left-6 top-1/3 z-30 scale-125">
+        <button onclick="openNotice()" class="glass-ui w-20 h-20 rounded-2xl shadow-xl border-b-4 border-rose-500 flex flex-col items-center justify-center hover:translate-x-2 transition active:scale-95">
+            <span class="text-3xl">📢</span><span id="lbl-notice" class="text-[10px] font-black uppercase mt-1">Duyuru</span>
+        </button>
+    </aside>
+
+    <div class="absolute inset-0 pointer-events-none z-10 flex items-center justify-between px-6">
+        <button onclick="prevVersion()" class="pointer-events-auto side-arrow text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button onclick="nextVersion()" class="pointer-events-auto side-arrow text-slate-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+        </button>
+    </div>
+
+    <div class="absolute bottom-12 right-12 z-30 scale-110">
+        <a id="main-download-link" href="#" target="_blank" class="ba-gradient text-white px-16 py-10 campaign-btn shadow-2xl hover:brightness-110 transition group block relative overflow-hidden active:scale-95">
+            <div class="flex flex-col items-end">
+                <span id="lbl-op" class="text-xs italic opacity-80 uppercase font-black tracking-widest">Operasyon</span>
+                <span id="lbl-dl" class="text-5xl font-black tracking-tighter uppercase leading-none">İndir</span>
+            </div>
+        </a>
+    </div>
+
+    <div id="notice-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+        <div class="glass-ui w-full max-w-[600px] h-[60vh] rounded-3xl shadow-2xl flex flex-col border-2 border-sky-400 overflow-hidden">
+            <div class="bg-sky-500 text-white px-8 py-5 flex justify-between items-center"><h2 id="modal-title" class="font-black text-xl uppercase italic">Duyuru</h2><button onclick="closeNotice()" class="text-4xl font-bold">&times;</button></div>
+            <div id="modal-content" class="p-8 overflow-y-auto flex-1 text-lg font-bold text-sky-600"></div>
+        </div>
+    </div>
+
+    <div id="about-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-4">
+        <div class="glass-ui w-full max-w-[550px] rounded-3xl shadow-2xl flex flex-col border-2 border-sky-400 overflow-hidden">
+            <div class="bg-sky-600 text-white px-8 py-5 flex justify-between items-center"><h2 id="about-title" class="font-black text-xl italic uppercase tracking-widest">Archive OS</h2><button onclick="closeAbout()" class="text-4xl font-bold">&times;</button></div>
+            <div id="about-content" class="p-8 text-lg leading-relaxed"></div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto group">
+        <div class="glass-ui px-10 py-5 rounded-[40px] flex items-center gap-8 border-b-4 border-sky-400 shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-300 group-hover:-translate-y-2 group-hover:border-sky-300">
+            <div class="relative flex items-center gap-4">
+                <img src="logo1.png" alt="Logo" class="h-16 w-auto object-contain logo-glow transition-transform duration-500 group-hover:scale-110">
+                <div class="flex flex-col">
+                    <span class="font-black text-3xl italic tracking-tighter text-sky-600 leading-none">ARCHIVE<span class="text-sky-400 uppercase">os</span></span>
+                    <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-sky-400/80 mt-1">Strategic System</span>
+                </div>
+            </div>
+            <div class="h-12 w-[2px] bg-sky-200/30"></div>
+            <div class="flex items-center gap-5">
+                <a href="https://instagram.com/archive_os_official" target="_blank" class="hover:scale-125 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-sky-500 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://youtube.com/@ArchiveOS-Official" target="_blank" class="hover:scale-125 transition-transform duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-9 h-9 text-rose-500 fill-current" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                </a>
+                <a href="https://github.com/ArchiveOS-Owners" target="_blank" class="hover:scale-125 transition-transform duration-300">
+                <img src="github.svg" alt="GitHub" class="w-8 h-8 object-contain">
+            </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BURADAKİ LİNKLERİ DEĞİŞTİR ---
+        const versionLinks = {
+            junko: 'https://drive.google.com/file/d/16vZizsB9eaGhJmXpLI6APkA-vMgsZ7Cy/view?usp=sharing',
+            standard: 'https://mega.nz/file/yoISnTBC#po4-JSDhZOEqJvWR58WUMtqbXCQpRAAJ1YTyC8waG8M',
+            gaming: 'https://mega.nz/file/zsIn3ZhJ#7qysSV0VDVLtJl2pMcbkWhGafN-enMuzW1_39U-i25Q',
+            lite: 'https://mega.nz/file/T8pxiSZS#lTRiep_7t6QYLiDm4882Eu-z7MF9Z-BLyhh2TloZTYs'
+        };
+        // ---------------------------------
+
+        let currentLang = 'tr';
+        let isDark = false;
+        let isMuted = false;
+        const music = document.getElementById('bg-music');
+        const versionKeys = ['junko', 'standard', 'gaming', 'lite'];
+        let currentKey = 'junko';
+
+        const i18n = {
+            tr: {
+                langBtn: 'TR', notice: 'Duyuru', op: 'Operasyon', dl: 'İndir',
+                modalTitle: '📢 SİSTEM GÜNCELLEMESİ',
+                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• Arka planlar PNG sistemine güncelleme geldi.</p><p>• Müzik otomatik başlatma entegre edildi.</p><p>• Bazi buglar fixlendi</p><p>• Görsel kalitesi Gemini yardımı ile iyileştirildi</p></div>`,
+                aboutTitle: 'ARCHIVE OS HAKKINDA',
+                aboutContent: `<p class="font-bold text-sky-600">Archive OS, Blue Archive'den esinlenmiş, akıcı ve modern bir deneyim sunan hayran projesidir.</p>`,
+                versions: { junko: 'Sensei : Junko Sürümü', standard: 'Sensei : Standart Sürüm', gaming: 'Sensei : Oyun Sürümü', lite: 'Sensei : Lite Sürüm' }
+            },
+            en: {
+                langBtn: 'EN', notice: 'Notice', op: 'Operation', dl: 'Download',
+                modalTitle: '📢 SYSTEM UPDATE',
+                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• PNG background system update has arrived.</p><p>• Music starts automatically.</p><p>• Some theft issues have been fixed.</p><p>• The quality of the images was improved with the help of Gemini.</p></div>`,
+                aboutTitle: 'ABOUT ARCHIVE OS',
+                aboutContent: `<p class="font-bold text-sky-600">Archive OS is a fan project inspired by Blue Archive, designed for a fluid experience.</p>`,
+                versions: { junko: 'Sensei : Junko Edition', standard: 'Sensei : Standard Edition', gaming: 'Sensei : Gaming Edition', lite: 'Sensei : Lite Edition' }
+            }
+        };
+
+        const versionData = { junko: '1.png', standard: '2.png', gaming: '3.png', lite: '4.png' };
+
+        function setVersion(key) {
+            currentKey = key;
+            const bgImg = document.getElementById('bg-image');
+
+            // Linki dinamik olarak değiştiriyoruz
+            document.getElementById('main-download-link').href = versionLinks[key];
+
+            bgImg.style.opacity = '0';
+            setTimeout(() => { bgImg.src = versionData[key]; bgImg.style.opacity = '1'; }, 300);
+            updateLanguage();
+            versionKeys.forEach(k => document.getElementById('btn-' + k).classList.remove('active-link'));
+            document.getElementById('btn-' + key).classList.add('active-link');
+        }
+
+        function playMusic() {
+            music.play().catch(() => {
+                document.addEventListener('mouseover', () => music.play(), { once: true });
+                document.addEventListener('click', () => music.play(), { once: true });
+            });
+        }
+
+        window.onload = () => {
+            updateLanguage();
+            playMusic();
+            document.getElementById('main-download-link').href = versionLinks[currentKey];
+        };
+
+        function nextVersion() { setVersion(versionKeys[(versionKeys.indexOf(currentKey) + 1) % versionKeys.length]); }
+        function prevVersion() { setVersion(versionKeys[(versionKeys.indexOf(currentKey) - 1 + versionKeys.length) % versionKeys.length]); }
+        function toggleMusic() { isMuted = !isMuted; isMuted ? music.pause() : music.play(); document.getElementById('music-icon').innerText = isMuted ? '🔇' : '🔊'; }
+        function toggleTheme() {
+            isDark = !isDark;
+            document.body.className = isDark ? 'theme-dark h-screen w-screen relative overflow-hidden' : 'theme-light h-screen w-screen relative overflow-hidden';
+            document.getElementById('bg-image').style.filter = isDark ? 'brightness(0.5)' : 'brightness(1)';
+        }
+        function updateLanguage() {
+            const data = i18n[currentLang];
+            document.getElementById('lang-btn').innerText = data.langBtn;
+            document.getElementById('lbl-notice').innerText = data.notice;
+            document.getElementById('lbl-op').innerText = data.op;
+            document.getElementById('lbl-dl').innerText = data.dl;
+            document.getElementById('modal-title').innerText = data.modalTitle;
+            document.getElementById('modal-content').innerHTML = data.modalContent;
+            document.getElementById('about-title').innerText = data.aboutTitle;
+            document.getElementById('about-content').innerHTML = data.aboutContent;
+            document.getElementById('version-display').innerText = data.versions[currentKey];
+        }
+        function toggleLang() { currentLang = currentLang === 'tr' ? 'en' : 'tr'; updateLanguage(); }
+        function openNotice() { document.getElementById('notice-modal').classList.remove('hidden'); }
+        function closeNotice() { document.getElementById('notice-modal').classList.add('hidden'); }
+        function openAbout() { document.getElementById('about-modal').classList.remove('hidden'); }
+        function closeAbout() { document.getElementById('about-modal').classList.add('hidden'); }
+    </script>
+</body>
+</html>
