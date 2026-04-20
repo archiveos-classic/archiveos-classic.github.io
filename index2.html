@@ -51,6 +51,9 @@
         <button onclick="setVersion('junko')" id="btn-junko" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90 active-link">
             <span class="text-3xl">🍔</span><span class="text-[10px] font-black uppercase mt-1">Junko</span>
         </button>
+        <button onclick="setVersion('shiroko')" id="btn-shiroko" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90">
+            <span class="text-3xl">🐺</span><span class="text-[10px] font-black uppercase mt-1">Shiroko</span>
+        </button>
         <button onclick="setVersion('standard')" id="btn-standard" class="w-20 h-20 rounded-2xl flex flex-col items-center justify-center transition active:scale-90">
             <span class="text-3xl">☁️</span><span class="text-[10px] font-black uppercase mt-1">Std</span>
         </button>
@@ -125,54 +128,68 @@
     </div>
 
     <script>
-        // --- BURADAKİ LİNKLERİ DEĞİŞTİR ---
+      
         const versionLinks = {
             junko: 'https://drive.google.com/file/d/1LA6QP22vL7D7932Rtm7rH8Wjygfqg3tZ/view?usp=sharing',
+            shiroko: 'https://drive.google.com/file/d/1exB7WEsIB272zCp8PNwGC8E3E2d4a_JU/view?usp=sharing', 
             standard: 'https://mega.nz/file/yoISnTBC#po4-JSDhZOEqJvWR58WUMtqbXCQpRAAJ1YTyC8waG8M',
             gaming: 'https://mega.nz/file/zsIn3ZhJ#7qysSV0VDVLtJl2pMcbkWhGafN-enMuzW1_39U-i25Q',
             lite: 'https://mega.nz/file/T8pxiSZS#lTRiep_7t6QYLiDm4882Eu-z7MF9Z-BLyhh2TloZTYs'
         };
-        // ---------------------------------
 
         let currentLang = 'tr';
         let isDark = false;
         let isMuted = false;
         const music = document.getElementById('bg-music');
-        const versionKeys = ['junko', 'standard', 'gaming', 'lite'];
+
+        const versionKeys = ['junko', 'shiroko', 'standard', 'gaming', 'lite']; 
         let currentKey = 'junko';
 
         const i18n = {
             tr: {
                 langBtn: 'TR', notice: 'Duyuru', op: 'Operasyon', dl: 'İndir',
                 modalTitle: '📢 SİSTEM GÜNCELLEMESİ',
-                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• Arka planlar PNG sistemine güncelleme geldi.</p><p>• Müzik otomatik başlatma entegre edildi.</p><p>• Bazi buglar fixlendi</p><p>• Görsel kalitesi Gemini yardımı ile iyileştirildi</p></div>`,
+                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• Shiroko Sürümü listeye eklendi!</p><p>• Arka planlar PNG sistemine güncelleme geldi.</p><p>• Müzik otomatik başlatma entegre edildi.</p><p>• Bazi buglar fixlendi</p></div>`,
                 aboutTitle: 'ARCHIVE OS HAKKINDA',
-                aboutContent: `<p class="font-bold text-sky-600">Archive OS, Blue Archive'den esinlenmiş, akıcı ve modern bir deneyim sunan hayran projesidir.</p>`,
-                versions: { junko: 'Sensei : Junko Sürümü', standard: 'Sensei : Standart Sürüm DESTEK YOK', gaming: 'Sensei : Oyun Sürümü DESTEK YOK', lite: 'Sensei : Lite Sürüm DESTEK YOK' }
+                aboutContent: `<p class="font-bold text-sky-600">Archive OS, Blue Archive'den esinlenmiş bir hayran projesidir.</p>`,
+                versions: { 
+                    junko: 'Sensei : Junko Sürümü', 
+                    shiroko: 'Sensei : Shiroko Sürümü',
+                    standard: 'Sensei : Standart Sürüm DESTEK YOK', 
+                    gaming: 'Sensei : Oyun Sürümü DESTEK YOK', 
+                    lite: 'Sensei : Lite Sürüm DESTEK YOK' 
+                }
             },
             en: {
                 langBtn: 'EN', notice: 'Notice', op: 'Operation', dl: 'Download',
                 modalTitle: '📢 SYSTEM UPDATE',
-                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• PNG background system update has arrived.</p><p>• Music starts automatically.</p><p>• Some theft issues have been fixed.</p><p>• The quality of the images was improved with the help of Gemini.</p></div>`,
+                modalContent: `<div class="space-y-4"><h3 class="text-2xl font-black underline">Site Update</h3><p>• Shiroko Edition added to the list!</p><p>• PNG background system update arrived.</p></div>`,
                 aboutTitle: 'ABOUT ARCHIVE OS',
-                aboutContent: `<p class="font-bold text-sky-600">Archive OS is a fan project inspired by Blue Archive, designed for a fluid experience.</p>`,
-                versions: { junko: 'Sensei : Junko Edition', standard: 'Sensei : Standard Edition NO SUPPORT', gaming: 'Sensei : Gaming Edition NO SUPPORT', lite: 'Sensei : Lite Edition NO SUPPORT' }
+                aboutContent: `<p class="font-bold text-sky-600">Archive OS is a fan project inspired by Blue Archive.</p>`,
+                versions: { 
+                    junko: 'Sensei : Junko Edition', 
+                    shiroko: 'Sensei : Shiroko Edition',
+                    standard: 'Sensei : Standard Edition NO SUPPORT', 
+                    gaming: 'Sensei : Gaming Edition NO SUPPORT', 
+                    lite: 'Sensei : Lite Edition NO SUPPORT' 
+                }
             }
         };
 
-        const versionData = { junko: '1.png', standard: '2.png', gaming: '3.png', lite: '4.png' };
+        const versionData = { junko: '1.png', shiroko: '5.png', standard: '2.png', gaming: '3.png', lite: '4.png' };
 
         function setVersion(key) {
             currentKey = key;
             const bgImg = document.getElementById('bg-image');
-
-            // Linki dinamik olarak değiştiriyoruz
             document.getElementById('main-download-link').href = versionLinks[key];
 
             bgImg.style.opacity = '0';
             setTimeout(() => { bgImg.src = versionData[key]; bgImg.style.opacity = '1'; }, 300);
             updateLanguage();
-            versionKeys.forEach(k => document.getElementById('btn-' + k).classList.remove('active-link'));
+            versionKeys.forEach(k => {
+                const btn = document.getElementById('btn-' + k);
+                if(btn) btn.classList.remove('active-link');
+            });
             document.getElementById('btn-' + key).classList.add('active-link');
         }
 
