@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveOS | Sürüm Notları</title>
+    <link rel="icon" type="image/png" href="archiveos.png">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Basit cam pencere */
+        .window {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dil butonu */
+        .lang-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .lang-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 40px;
+            color: white;
+            cursor: pointer;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .lang-btn:hover {
+            background: #00d2ff;
+            color: #000;
+        }
+
+        /* Başlık */
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #00d2ff;
+        }
+
+        .version {
+            color: #aaa;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            border-left: 3px solid #00d2ff;
+            padding-left: 12px;
+        }
+
+        /* Notların yazılacağı alan */
+        .notes-area {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .notes-area h3 {
+            color: #00d2ff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .notes-list {
+            list-style: none;
+        }
+
+        .notes-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        .notes-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* İndirme butonu */
+        .download-btn {
+            display: inline-block;
+            background: #00d2ff;
+            color: #000;
+            text-decoration: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .download-btn:hover {
+            background: white;
+            transform: scale(1.02);
+        }
+
+        /* Uyarı kutuları */
+        .warning-box {
+            background: rgba(255, 100, 100, 0.15);
+            border-left: 4px solid #ff6b6b;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #ffb3b3;
+        }
+
+        .info-box {
+            background: rgba(0, 210, 255, 0.1);
+            border-left: 4px solid #00d2ff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #b8eaff;
+        }
+
+        .success-box {
+            background: rgba(0, 255, 150, 0.1);
+            border-left: 4px solid #00ff96;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #aaffdd;
+        }
+
+        /* SHA256 alanı */
+        .sha {
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            color: #888;
+            text-align: center;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 12px;
+            word-break: break-all;
+        }
+
+        hr {
+            border-color: rgba(255,255,255,0.1);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="window">
+    <!-- Dil seçeneği -->
+    <div class="lang-bar">
+        <button class="lang-btn" id="langToggle">Türkçe</button>
+    </div>
+
+    <!-- Başlık -->
+    <h1 id="title">ArchiveOS Sürüm Notları</h1>
+    <div class="version" id="version">v28 | 29 Nisan 2026</div>
+
+    <!-- NOTLARIN YAZILACAĞI ALAN -->
+    <div class="notes-area">
+        <h3 id="notesTitle">📝 Yenilikler ve Değişiklikler</h3>
+        <ul class="notes-list" id="notesList">
+            <li>✨ Yeni Liquid Glass arayüz teması</li>
+            <li>⚡ Performans iyileştirmeleri</li>
+            <li>🛡️ Güvenlik güncellemeleri</li>
+            <li>🐧 Ubuntu tabanına geçildi</li>
+            <li>🐞 Hata düzeltmeleri</li>
+        </ul>
+    </div>
+
+    <!-- UYARILAR -->
+    <div class="warning-box" id="ventoyWarning">
+        ⚠️ Ventoy ile USB hazırlanmalıdır! Diğer yöntemlerde çalışma sorunu yaşanabilir.
+    </div>
+    <div class="success-box" id="biosSupport">
+        ✅ BIOS (Legacy) ve UEFI desteği mevcuttur. Her iki modda da çalışır.
+    </div>
+
+    <!-- İndirme butonu -->
+    <a href="https://drive.google.com/file/d/1vo0N2_XEWzw824AvuaTVpGiEGm5dXG35/view?usp=sharing" class="download-btn" id="downloadBtn">💾 ISO İndir</a>
+
+    <!-- SHA256 kodu - sen buraya istediğini yaz -->
+    <div class="sha" id="sha">SHA256: [c52f4e0acd54d8554e3bdf5a0671dad0382e5645af165ef72fe2f8015a5d2827]</div>
+    <hr>
+    <div style="font-size: 0.7rem; text-align: center; color:#666;">ArchiveOS | Özgür Linux Deneyimi</div>
+</div>
+
+<script>
+    // Dil desteği (İngilizce varsayılan, Türkçe ikinci)
+    let currentLang = 'en';
+
+    const translations = {
+        en: {
+            title: "ArchiveOS Release Notes",
+            version: "v28 | April 29, 2026",
+            notesTitle: "📝 What's New & Changes",
+            downloadBtn: "💾 Download ISO",
+            langText: "Türkçe",
+            ventoyWarning: "⚠️ USB must be prepared with Ventoy! Other methods may cause boot issues.",
+            biosSupport: "✅ BIOS (Legacy) and UEFI support available. Works in both modes.",
+            notesList: [
+                "✨ New Liquid Glass interface theme",
+                "⚡ Performance improvements",
+                "🛡️ Security updates",
+                "🐧 Switched to Ubuntu-based platform",
+                "🐞 Bug fixes"
+            ]
+        },
+        tr: {
+            title: "ArchiveOS Sürüm Notları",
+            version: "v28 | 29 Nisan 2026",
+            notesTitle: "📝 Yenilikler ve Değişiklikler",
+            downloadBtn: "💾 ISO İndir",
+            langText: "English",
+            ventoyWarning: "⚠️ USB, Ventoy ile hazırlanmalıdır! Diğer yöntemlerde çalışma sorunu yaşanabilir.",
+            biosSupport: "✅ BIOS (Legacy) ve UEFI desteği mevcuttur. Her iki modda da çalışır.",
+            notesList: [
+                "✨ Yeni Liquid Glass arayüz teması",
+                "⚡ Performans iyileştirmeleri",
+                "🛡️ Güvenlik güncellemeleri",
+                "🐧 Ubuntu tabanına geçildi",
+                "🐞 Hata düzeltmeleri"
+            ]
+        }
+    };
+
+    function updateLanguage() {
+        const t = translations[currentLang];
+        document.getElementById('title').textContent = t.title;
+        document.getElementById('version').textContent = t.version;
+        document.getElementById('notesTitle').textContent = t.notesTitle;
+        document.getElementById('downloadBtn').textContent = t.downloadBtn;
+        document.getElementById('langToggle').textContent = t.langText;
+        document.getElementById('ventoyWarning').textContent = t.ventoyWarning;
+        document.getElementById('biosSupport').textContent = t.biosSupport;
+
+        // Notları güncelle
+        const notesUl = document.getElementById('notesList');
+        notesUl.innerHTML = '';
+        t.notesList.forEach(note => {
+            const li = document.createElement('li');
+            li.textContent = note;
+            notesUl.appendChild(li);
+        });
+    }
+
+    function toggleLang() {
+        currentLang = currentLang === 'en' ? 'tr' : 'en';
+        updateLanguage();
+    }
+
+    document.getElementById('langToggle').addEventListener('click', toggleLang);
+
+    // Varsayılan İngilizce
+    updateLanguage();
+</script>
+
+<!-- NOT: Kendi notlarını eklemek için:
+     1. Yukarıdaki <ul class="notes-list"> içindeki <li>leri değiştir
+     2. Dil desteği için translations kısmındaki 'notesList' arraylerini değiştir
+     3. SHA256 kodunu .sha divinin içine yapıştır
+     Kolay gelsin! -->
+</body>
+</html>
