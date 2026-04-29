@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiveOS Lite | Hafif & Hızlı Linux</title>
+    <link rel="icon" type="image/png" href="archiveos.png">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --ubuntu-green: #0a3d2a;
+            --accent-green: #00ff88;
+            --glass-bg: rgba(0, 255, 100, 0.08);
+            --card-bg: rgba(0, 30, 10, 0.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            color: white;
+            background: linear-gradient(135deg, #0a2e1f, #1a4a2a, #0d3b1f);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 10%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 100, 0.2);
+        }
+
+        .logo img { height: 45px; }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .links a {
+            margin-left: 40px;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .links a:hover { color: var(--accent-green); }
+
+        .lang-switch {
+            background: rgba(0, 255, 100, 0.15);
+            border: 1px solid rgba(0, 255, 100, 0.3);
+            border-radius: 40px;
+            padding: 8px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #aaffcc;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Ubuntu', monospace;
+            backdrop-filter: blur(4px);
+        }
+
+        .lang-switch:hover {
+            background: var(--accent-green);
+            color: #0a2e1f;
+            border-color: transparent;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 900px;
+            width: 90%;
+            padding: 60px 0;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            font-size: clamp(3.5rem, 10vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            color: #00ff88;
+            text-shadow: 0 0 15px rgba(0,255,100,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #aaffcc;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .main-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 255, 100, 0.25);
+            border-radius: 24px;
+            padding: 60px;
+            width: 100%;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            margin-bottom: 60px;
+        }
+
+        .main-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--accent-green);
+        }
+
+        .main-card p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #d0ffdd;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-primary {
+            background: var(--accent-green);
+            color: #0a2e1f;
+            box-shadow: 0 10px 20px rgba(0, 255, 100, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.08);
+            background: #fff;
+            color: #0a2e1f;
+        }
+
+        /* ÖZELLİKLER - 3 kutu */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .feature-box {
+            background: rgba(0, 50, 20, 0.4);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 100, 0.15);
+            transition: 0.3s;
+        }
+
+        .feature-box:hover {
+            background: rgba(0, 80, 30, 0.5);
+            border-color: var(--accent-green);
+        }
+
+        .feature-box h3 {
+            font-size: 1.4rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+        }
+
+        .feature-box p {
+            font-size: 1.05rem;
+            color: #ccffdd;
+            line-height: 1.5;
+        }
+
+        /* Sistem istatistikleri */
+        .system-stats {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(0, 50, 20, 0.6);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #00ff88;
+            border: 1px solid rgba(0,255,100,0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .main-card { padding: 30px; }
+            h1 { font-size: 3rem; }
+            .btn { width: 100%; }
+            .nav-controls { gap: 15px; }
+            .links a { margin-left: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">
+        <img src="archiveos1.png" alt="ArchiveOS Lite">
+    </div>
+    <div class="nav-controls">
+        <div class="links">
+            <a href="https://github.com/archiveos-classic">GitHub</a>
+            <a href="index.html">Classic</a>
+        </div>
+        <button class="lang-switch" id="langToggleBtn">Türkçe'ye Geç</button>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 data-i18n="title">ArchiveOS Lite</h1>
+    <p class="subtitle" data-i18n="subtitle">Light. Fast. Minimal. Free Linux Experience.</p>
+
+    <!-- Sistem istatistikleri -->
+    <div class="system-stats">
+        <div class="stat-badge" id="statBase">🐧 Debian 13 Tabanlı</div>
+        <div class="stat-badge" id="statRamUsage">⚡ RAM Kullanımı: ~1.5-2GB</div>
+        <div class="stat-badge" id="statRamReq">🖥️ RAM Gereksinimi: 4-8GB</div>
+        <div class="stat-badge" id="statDesktop">💻 Masaüstü: KDE Plasma</div>
+    </div>
+
+    <div class="main-card">
+        <h2 data-i18n="card_title">ArchiveOS Lite v27</h2>
+        <p data-i18n="card_desc">
+            Düşük kaynaklı sistemler için tasarlanmıştır. Performans için optimize edilmiştir.
+            <br><br>
+            <strong style="color: #ff8888; font-size: 0.9rem;" data-i18n="bios_warning">⚠️ Sadece UEFI sistemleri destekler! BIOS/Legacy modunda çalışmaz.</strong>
+        </p>
+
+        <div class="btn-group">
+            <a href="surum-notlari-lite.html" class="btn btn-primary" data-i18n="download_btn">ISO İndir</a>
+        </div>
+    </div>
+
+    <!-- Özellik Kutuları -->
+    <div class="features">
+        <div class="feature-box" data-i18n-attrs='{"h3":"feature1_title","p":"feature1_desc"}'>
+            <h3>Hafif ve Hızlı ⚡</h3>
+            <p>Sadece ~1.5-2GB RAM kullanımı. 4GB RAM ile sorunsuz çalışır.</p>
+        </div>
+        <div class="feature-box" data-i18n-attrs='{"h3":"feature2_title","p":"feature2_desc"}'>
+            <h3>Debian 13 Tabanı 🐧</h3>
+            <p>Debian "Trixie" üzerine inşa edilmiştir, maksimum kararlılık ve güvenlik.</p>
+        </div>
+        <div class="feature-box" data-i18n-attrs='{"h3":"feature3_title","p":"feature3_desc"}'>
+            <h3>KDE Plasma 💻</h3>
+            <p>Modern ve özelleştirilebilir masaüstü ortamı, performans için optimize edilmiştir.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const translations = {
+        en: {
+            title: "ArchiveOS Lite",
+            subtitle: "Light. Fast. Minimal. Free Linux Experience.",
+            card_title: "ArchiveOS Lite v27",
+            card_desc: `Designed for low-resource systems. Optimized for performance.
+            <br><br>
+            <strong style="color: #ff8888; font-size: 0.9rem;">⚠️ Only UEFI systems supported! Does NOT work on BIOS/Legacy.</strong>`,
+            download_btn: "Download ISO",
+            bios_warning: "⚠️ Only UEFI systems supported! Does NOT work on BIOS/Legacy.",
+            feature1_title: "Lightweight & Fast ⚡",
+            feature1_desc: "Only ~1.5-2GB RAM usage. Runs smoothly on systems with 4GB RAM.",
+            feature2_title: "Debian 13 Base 🐧",
+            feature2_desc: "Built on Debian 'Trixie' for maximum stability and security.",
+            feature3_title: "KDE Plasma 💻",
+            feature3_desc: "Modern and customizable desktop environment, optimized for performance.",
+            toggle_btn_text: "Türkçe'ye Geç"
+        },
+        tr: {
+            title: "ArchiveOS Lite",
+            subtitle: "Hafif. Hızlı. Minimal. Özgür Linux Deneyimi.",
+            card_title: "ArchiveOS Lite v27",
+            card_desc: `Düşük kaynaklı sistemler için tasarlanmıştır. Performans için optimize edilmiştir.
+            <br><br>
+            <strong style="color: #ff8888; font-size: 0.9rem;">⚠️ Sadece UEFI sistemleri destekler! BIOS/Legacy modunda çalışmaz.</strong>`,
+            download_btn: "ISO İndir",
+            bios_warning: "⚠️ Sadece UEFI sistemleri destekler! BIOS/Legacy modunda çalışmaz.",
+            feature1_title: "Hafif ve Hızlı ⚡",
+            feature1_desc: "Sadece ~1.5-2GB RAM kullanımı. 4GB RAM ile sorunsuz çalışır.",
+            feature2_title: "Debian 13 Tabanı 🐧",
+            feature2_desc: "Debian 'Trixie' üzerine inşa edilmiştir, maksimum kararlılık ve güvenlik.",
+            feature3_title: "KDE Plasma 💻",
+            feature3_desc: "Modern ve özelleştirilebilir masaüstü ortamı, performans için optimize edilmiştir.",
+            toggle_btn_text: "Switch to English"
+        }
+    };
+
+    let currentLang = 'en';
+
+    function updateLanguage(lang) {
+        const t = translations[lang];
+        if (!t) return;
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) {
+                el.innerHTML = t[key];
+            }
+        });
+
+        document.querySelectorAll('[data-i18n-attrs]').forEach(el => {
+            const mapDef = el.getAttribute('data-i18n-attrs');
+            if (mapDef) {
+                try {
+                    const mapping = JSON.parse(mapDef);
+                    for (const [selector, key] of Object.entries(mapping)) {
+                        if (t[key] !== undefined) {
+                            const targetEl = el.querySelector(selector);
+                            if (targetEl) {
+                                targetEl.innerHTML = t[key];
+                            }
+                        }
+                    }
+                } catch(e) { console.warn(e); }
+            }
+        });
+
+        // Stat badge'leri güncelle
+        const statBase = document.getElementById('statBase');
+        const statRamUsage = document.getElementById('statRamUsage');
+        const statRamReq = document.getElementById('statRamReq');
+        const statDesktop = document.getElementById('statDesktop');
+
+        if (lang === 'tr') {
+            statBase.innerHTML = "🐧 Debian 13 Tabanlı";
+            statRamUsage.innerHTML = "⚡ RAM Kullanımı: ~1.5-2GB";
+            statRamReq.innerHTML = "🖥️ RAM Gereksinimi: 4-8GB";
+            statDesktop.innerHTML = "💻 Masaüstü: KDE Plasma";
+        } else {
+            statBase.innerHTML = "🐧 Debian 13 Based";
+            statRamUsage.innerHTML = "⚡ RAM Usage: ~1.5-2GB";
+            statRamReq.innerHTML = "🖥️ RAM Requirement: 4-8GB";
+            statDesktop.innerHTML = "💻 Desktop: KDE Plasma";
+        }
+
+        const toggleBtn = document.getElementById('langToggleBtn');
+        if (toggleBtn) {
+            toggleBtn.textContent = t.toggle_btn_text;
+        }
+    }
+
+    function setLanguage(lang) {
+        if (lang !== 'en' && lang !== 'tr') return;
+        currentLang = lang;
+        updateLanguage(currentLang);
+        localStorage.setItem('archiveos_lite_lang', currentLang);
+    }
+
+    function toggleLanguage() {
+        const newLang = currentLang === 'en' ? 'tr' : 'en';
+        setLanguage(newLang);
+    }
+
+    function loadUserLangPreference() {
+        const savedLang = localStorage.getItem('archiveos_lite_lang');
+        if (savedLang === 'en' || savedLang === 'tr') {
+            setLanguage(savedLang);
+        } else {
+            setLanguage('en');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadUserLangPreference();
+
+        const toggleBtn = document.getElementById('langToggleBtn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', toggleLanguage);
+        }
+    });
+</script>
+</body>
+</html>
