@@ -163,6 +163,24 @@
             color: #aaffdd;
         }
 
+        /* RAM ve sistem bilgileri için ekstra stiller */
+        .system-stats {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(0,0,0,0.4);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #00d2ff;
+            border: 1px solid rgba(0,210,255,0.3);
+        }
+
         /* SHA256 alanı */
         .sha {
             margin-top: 20px;
@@ -194,6 +212,13 @@
     <h1 id="title">ArchiveOS Sürüm Notları</h1>
     <div class="version" id="version">v28 | 29 Nisan 2026</div>
 
+    <!-- Sistem istatistikleri - RAM ve Masaüstü -->
+    <div class="system-stats">
+        <div class="stat-badge" id="statRamUsage">⚡ RAM Kullanımı: ~2GB (Boşta 1.5-2GB)</div>
+        <div class="stat-badge" id="statRamReq">🖥️ RAM Gereksinimi: 4-8GB</div>
+        <div class="stat-badge" id="statDesktop">💻 Masaüstü: KDE Plasma</div>
+    </div>
+
     <!-- NOTLARIN YAZILACAĞI ALAN -->
     <div class="notes-area">
         <h3 id="notesTitle">📝 Yenilikler ve Değişiklikler</h3>
@@ -217,7 +242,7 @@
     <!-- İndirme butonu -->
     <a href="https://drive.google.com/file/d/1vo0N2_XEWzw824AvuaTVpGiEGm5dXG35/view?usp=sharing" class="download-btn" id="downloadBtn">💾 ISO İndir</a>
 
-    <!-- SHA256 kodu - sen buraya istediğini yaz -->
+    <!-- SHA256 kodu -->
     <div class="sha" id="sha">SHA256: [c52f4e0acd54d8554e3bdf5a0671dad0382e5645af165ef72fe2f8015a5d2827]</div>
     <hr>
     <div style="font-size: 0.7rem; text-align: center; color:#666;">ArchiveOS | Özgür Linux Deneyimi</div>
@@ -231,6 +256,9 @@
         en: {
             title: "ArchiveOS Release Notes",
             version: "v28 | April 29, 2026",
+            statRamUsage: "⚡ RAM Usage: ~2GB (Idle 1.5-2GB)",
+            statRamReq: "🖥️ RAM Requirement: 4-8GB",
+            statDesktop: "💻 Desktop: KDE Plasma",
             notesTitle: "📝 What's New & Changes",
             downloadBtn: "💾 Download ISO",
             langText: "Türkçe",
@@ -247,6 +275,9 @@
         tr: {
             title: "ArchiveOS Sürüm Notları",
             version: "v28 | 29 Nisan 2026",
+            statRamUsage: "⚡ RAM Kullanımı: ~2GB (Boşta 1.5-2GB)",
+            statRamReq: "🖥️ RAM Gereksinimi: 4-8GB",
+            statDesktop: "💻 Masaüstü: KDE Plasma",
             notesTitle: "📝 Yenilikler ve Değişiklikler",
             downloadBtn: "💾 ISO İndir",
             langText: "English",
@@ -266,6 +297,9 @@
         const t = translations[currentLang];
         document.getElementById('title').textContent = t.title;
         document.getElementById('version').textContent = t.version;
+        document.getElementById('statRamUsage').textContent = t.statRamUsage;
+        document.getElementById('statRamReq').textContent = t.statRamReq;
+        document.getElementById('statDesktop').textContent = t.statDesktop;
         document.getElementById('notesTitle').textContent = t.notesTitle;
         document.getElementById('downloadBtn').textContent = t.downloadBtn;
         document.getElementById('langToggle').textContent = t.langText;
@@ -297,6 +331,7 @@
      1. Yukarıdaki <ul class="notes-list"> içindeki <li>leri değiştir
      2. Dil desteği için translations kısmındaki 'notesList' arraylerini değiştir
      3. SHA256 kodunu .sha divinin içine yapıştır
+     RAM kullanımı: ~2GB (boşta 1.5-2GB) | Gereksinim: 4-8GB | Masaüstü: KDE Plasma
      Kolay gelsin! -->
 </body>
 </html>
