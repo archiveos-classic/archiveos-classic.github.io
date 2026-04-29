@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArchiveOS | Sürüm Notları</title>
+    <title>ArchiveOS Lite | Hafif & Hızlı Linux</title>
     <link rel="icon" type="image/png" href="archiveos.png">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Ubuntu', sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: linear-gradient(135deg, #0a2e1f, #1a4a2a, #0d3b1f);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
@@ -24,16 +24,16 @@
             padding: 20px;
         }
 
-        /* Basit cam pencere */
+        /* Basit cam pencere - yeşil ton */
         .window {
             max-width: 700px;
             width: 100%;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 30, 10, 0.6);
             backdrop-filter: blur(20px);
             border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 100, 0.3);
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,255,100,0.1);
             animation: fadeIn 0.5s ease;
         }
 
@@ -50,11 +50,11 @@
         }
 
         .lang-btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(0,255,100,0.15);
+            border: 1px solid rgba(0,255,100,0.3);
             padding: 8px 20px;
             border-radius: 40px;
-            color: white;
+            color: #aaffcc;
             cursor: pointer;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 500;
@@ -62,60 +62,61 @@
         }
 
         .lang-btn:hover {
-            background: #00d2ff;
-            color: #000;
+            background: #00ff66;
+            color: #0a2e1f;
         }
 
         /* Başlık */
         h1 {
             font-size: 2.2rem;
             margin-bottom: 10px;
-            color: #00d2ff;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0,255,100,0.3);
         }
 
         .version {
-            color: #aaa;
+            color: #88ffaa;
             margin-bottom: 30px;
             font-size: 0.9rem;
-            border-left: 3px solid #00d2ff;
+            border-left: 3px solid #00ff88;
             padding-left: 12px;
         }
 
-        /* Notların yazılacağı alan */
-        .notes-area {
-            background: rgba(0,0,0,0.3);
+        /* Özellikler alanı */
+        .features-area {
+            background: rgba(0,30,10,0.5);
             border-radius: 20px;
             padding: 25px;
             margin: 25px 0;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(0,255,100,0.2);
         }
 
-        .notes-area h3 {
-            color: #00d2ff;
+        .features-area h3 {
+            color: #00ff88;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
 
-        .notes-list {
+        .features-list {
             list-style: none;
         }
 
-        .notes-list li {
+        .features-list li {
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            color: #ddd;
+            border-bottom: 1px solid rgba(0,255,100,0.1);
+            color: #ccffdd;
             line-height: 1.5;
         }
 
-        .notes-list li:last-child {
+        .features-list li:last-child {
             border-bottom: none;
         }
 
         /* İndirme butonu */
         .download-btn {
             display: inline-block;
-            background: #00d2ff;
-            color: #000;
+            background: #00cc66;
+            color: #0a2e1f;
             text-decoration: none;
             padding: 14px 35px;
             border-radius: 50px;
@@ -125,42 +126,54 @@
             transition: 0.2s;
             border: none;
             cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,255,100,0.3);
         }
 
         .download-btn:hover {
-            background: white;
+            background: #00ff88;
             transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(0,255,100,0.5);
         }
 
         /* Uyarı kutuları */
         .warning-box {
-            background: rgba(255, 100, 100, 0.15);
-            border-left: 4px solid #ff6b6b;
+            background: rgba(255, 80, 80, 0.15);
+            border-left: 4px solid #ff5555;
             padding: 12px 16px;
             border-radius: 12px;
             margin: 15px 0;
             font-size: 0.85rem;
-            color: #ffb3b3;
-        }
-
-        .info-box {
-            background: rgba(0, 210, 255, 0.1);
-            border-left: 4px solid #00d2ff;
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin: 15px 0;
-            font-size: 0.85rem;
-            color: #b8eaff;
+            color: #ffaaaa;
         }
 
         .success-box {
-            background: rgba(0, 255, 150, 0.1);
-            border-left: 4px solid #00ff96;
+            background: rgba(0, 255, 100, 0.1);
+            border-left: 4px solid #00ff88;
             padding: 12px 16px;
             border-radius: 12px;
             margin: 15px 0;
             font-size: 0.85rem;
-            color: #aaffdd;
+            color: #aaffcc;
+        }
+
+        .info-box {
+            background: rgba(0, 200, 255, 0.1);
+            border-left: 4px solid #00ccff;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #aaffff;
+        }
+
+        .error-box {
+            background: rgba(255, 50, 50, 0.15);
+            border-left: 4px solid #ff3300;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-size: 0.85rem;
+            color: #ffaaaa;
         }
 
         /* SHA256 alanı */
@@ -168,17 +181,34 @@
             margin-top: 20px;
             font-family: monospace;
             font-size: 0.7rem;
-            color: #888;
+            color: #66ff99;
             text-align: center;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,30,10,0.5);
             padding: 12px;
             border-radius: 12px;
             word-break: break-all;
         }
 
         hr {
-            border-color: rgba(255,255,255,0.1);
+            border-color: rgba(0,255,100,0.2);
             margin: 15px 0;
+        }
+
+        .system-stats {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(0,50,20,0.5);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #00ff88;
+            border: 1px solid rgba(0,255,100,0.2);
         }
     </style>
 </head>
@@ -191,18 +221,26 @@
     </div>
 
     <!-- Başlık -->
-    <h1 id="title">ArchiveOS Sürüm Notları</h1>
-    <div class="version" id="version">v28 | 29 Nisan 2026</div>
+    <h1 id="title">ArchiveOS Lite</h1>
+    <div class="version" id="version">v27 | 29 Nisan 2026</div>
 
-    <!-- NOTLARIN YAZILACAĞI ALAN -->
-    <div class="notes-area">
-        <h3 id="notesTitle">📝 Yenilikler ve Değişiklikler</h3>
-        <ul class="notes-list" id="notesList">
-            <li>✨ Yeni Liquid Glass arayüz teması</li>
-            <li>⚡ Performans iyileştirmeleri</li>
-            <li>🛡️ Güvenlik güncellemeleri</li>
-            <li>🐧 Ubuntu tabanına geçildi</li>
-            <li>🐞 Hata düzeltmeleri</li>
+    <!-- Sistem istatistikleri -->
+    <div class="system-stats">
+        <div class="stat-badge" id="statRamMin">🖥️ Min RAM: 4GB</div>
+        <div class="stat-badge" id="statRamUse">⚡ Kullanım: ~1.5GB</div>
+        <div class="stat-badge" id="statDesktop">💻 Masaüstü: KDE Plasma</div>
+    </div>
+
+    <!-- ÖZELLİKLER ALANI -->
+    <div class="features-area">
+        <h3 id="featuresTitle">💎 Öne Çıkan Özellikler</h3>
+        <ul class="features-list" id="featuresList">
+            <li>🚀 Hafif ve optimize - Sadece 1.5GB RAM kullanımı</li>
+            <li>🐧 Debian 13 "Trixie" temelli</li>
+            <li>💻 KDE Plasma masaüstü ortamı</li>
+            <li>📦 Minimal uygulama seti - Sadece ihtiyacın olanlar</li>
+            <li>⚡ Düşük güç tüketimi - Eski bilgisayarlar için ideal</li>
+            <li>🛡️ Güvenli ve kararlı - Debian güvenilirliği</li>
         </ul>
     </div>
 
@@ -210,17 +248,23 @@
     <div class="warning-box" id="ventoyWarning">
         ⚠️ Ventoy ile USB hazırlanmalıdır! Diğer yöntemlerde çalışma sorunu yaşanabilir.
     </div>
-    <div class="success-box" id="biosSupport">
-        ✅ BIOS (Legacy) ve UEFI desteği mevcuttur. Her iki modda da çalışır.
+    <div class="success-box" id="uefiSupport">
+        ✅ UEFI sistemleri tam destekler. Sorunsuz çalışır.
+    </div>
+    <div class="error-box" id="biosWarning">
+        ❌ BIOS (Legacy) modunda AÇILMAZ! Sadece UEFI modunda çalışır.
+    </div>
+    <div class="info-box" id="ramInfo">
+        💡 Önerilen RAM: 4GB (Minimum gereksinim) | Boşta kullanım: Yaklaşık 1.5GB
     </div>
 
     <!-- İndirme butonu -->
-    <a href="https://drive.google.com/file/d/1vo0N2_XEWzw824AvuaTVpGiEGm5dXG35/view?usp=sharing" class="download-btn" id="downloadBtn">💾 ISO İndir</a>
+    <a href="https://mega.nz/file/T8pxiSZS#lTRiep_7t6QYLiDm4882Eu-z7MF9Z-BLyhh2TloZTYs" class="download-btn" id="downloadBtn">💾 ISO İndir (Yakında)</a>
 
-    <!-- SHA256 kodu - sen buraya istediğini yaz -->
-    <div class="sha" id="sha">SHA256: [c52f4e0acd54d8554e3bdf5a0671dad0382e5645af165ef72fe2f8015a5d2827]</div>
+    <!-- SHA256 kodu -->
+    <div class="sha" id="sha">SHA256: [İndirme hazır olduğunda eklenecek]</div>
     <hr>
-    <div style="font-size: 0.7rem; text-align: center; color:#666;">ArchiveOS | Özgür Linux Deneyimi</div>
+    <div style="font-size: 0.7rem; text-align: center; color:#66ff99;">ArchiveOS Lite | Az kaynak, çok performans | KDE Plasma</div>
 </div>
 
 <script>
@@ -229,35 +273,47 @@
 
     const translations = {
         en: {
-            title: "ArchiveOS Release Notes",
-            version: "v28 | April 29, 2026",
-            notesTitle: "📝 What's New & Changes",
-            downloadBtn: "💾 Download ISO",
+            title: "ArchiveOS Lite",
+            version: "v27 | April 29, 2026",
+            statRamMin: "🖥️ Min RAM: 4GB",
+            statRamUse: "⚡ Usage: ~1.5GB",
+            statDesktop: "💻 Desktop: KDE Plasma",
+            featuresTitle: "💎 Key Features",
+            downloadBtn: "💾 Download ISO (Soon)",
             langText: "Türkçe",
             ventoyWarning: "⚠️ USB must be prepared with Ventoy! Other methods may cause boot issues.",
-            biosSupport: "✅ BIOS (Legacy) and UEFI support available. Works in both modes.",
-            notesList: [
-                "✨ New Liquid Glass interface theme",
-                "⚡ Performance improvements",
-                "🛡️ Security updates",
-                "🐧 Switched to Ubuntu-based platform",
-                "🐞 Bug fixes"
+            uefiSupport: "✅ Full UEFI support. Works flawlessly.",
+            biosWarning: "❌ Does NOT boot in BIOS (Legacy) mode! Only UEFI mode works.",
+            ramInfo: "💡 Recommended RAM: 4GB (Minimum requirement) | Idle usage: ~1.5GB",
+            featuresList: [
+                "🚀 Lightweight & optimized - Only 1.5GB RAM usage",
+                "🐧 Debian 13 'Trixie' based",
+                "💻 KDE Plasma desktop environment",
+                "📦 Minimal application set - Only what you need",
+                "⚡ Low power consumption - Ideal for old computers",
+                "🛡️ Secure and stable - Debian reliability"
             ]
         },
         tr: {
-            title: "ArchiveOS Sürüm Notları",
-            version: "v28 | 29 Nisan 2026",
-            notesTitle: "📝 Yenilikler ve Değişiklikler",
-            downloadBtn: "💾 ISO İndir",
+            title: "ArchiveOS Lite",
+            version: "v27 | 29 Nisan 2026",
+            statRamMin: "🖥️ Min RAM: 4GB",
+            statRamUse: "⚡ Kullanım: ~1.5GB",
+            statDesktop: "💻 Masaüstü: KDE Plasma",
+            featuresTitle: "💎 Öne Çıkan Özellikler",
+            downloadBtn: "💾 ISO İndir (Yakında)",
             langText: "English",
-            ventoyWarning: "⚠️ USB, Ventoy ile hazırlanmalıdır! Diğer yöntemlerde çalışma sorunu yaşanabilir.",
-            biosSupport: "✅ BIOS (Legacy) ve UEFI desteği mevcuttur. Her iki modda da çalışır.",
-            notesList: [
-                "✨ Yeni Liquid Glass arayüz teması",
-                "⚡ Performans iyileştirmeleri",
-                "🛡️ Güvenlik güncellemeleri",
-                "🐧 Ubuntu tabanına geçildi",
-                "🐞 Hata düzeltmeleri"
+            ventoyWarning: "⚠️ Ventoy ile USB hazırlanmalıdır! Diğer yöntemlerde çalışma sorunu yaşanabilir.",
+            uefiSupport: "✅ UEFI sistemleri tam destekler. Sorunsuz çalışır.",
+            biosWarning: "❌ BIOS (Legacy) modunda AÇILMAZ! Sadece UEFI modunda çalışır.",
+            ramInfo: "💡 Önerilen RAM: 4GB (Minimum gereksinim) | Boşta kullanım: Yaklaşık 1.5GB",
+            featuresList: [
+                "🚀 Hafif ve optimize - Sadece 1.5GB RAM kullanımı",
+                "🐧 Debian 13 'Trixie' temelli",
+                "💻 KDE Plasma masaüstü ortamı",
+                "📦 Minimal uygulama seti - Sadece ihtiyacın olanlar",
+                "⚡ Düşük güç tüketimi - Eski bilgisayarlar için ideal",
+                "🛡️ Güvenli ve kararlı - Debian güvenilirliği"
             ]
         }
     };
@@ -266,19 +322,24 @@
         const t = translations[currentLang];
         document.getElementById('title').textContent = t.title;
         document.getElementById('version').textContent = t.version;
-        document.getElementById('notesTitle').textContent = t.notesTitle;
+        document.getElementById('statRamMin').textContent = t.statRamMin;
+        document.getElementById('statRamUse').textContent = t.statRamUse;
+        document.getElementById('statDesktop').textContent = t.statDesktop;
+        document.getElementById('featuresTitle').textContent = t.featuresTitle;
         document.getElementById('downloadBtn').textContent = t.downloadBtn;
         document.getElementById('langToggle').textContent = t.langText;
         document.getElementById('ventoyWarning').textContent = t.ventoyWarning;
-        document.getElementById('biosSupport').textContent = t.biosSupport;
-
-        // Notları güncelle
-        const notesUl = document.getElementById('notesList');
-        notesUl.innerHTML = '';
-        t.notesList.forEach(note => {
+        document.getElementById('uefiSupport').textContent = t.uefiSupport;
+        document.getElementById('biosWarning').textContent = t.biosWarning;
+        document.getElementById('ramInfo').textContent = t.ramInfo;
+        
+        // Özellikleri güncelle
+        const featuresUl = document.getElementById('featuresList');
+        featuresUl.innerHTML = '';
+        t.featuresList.forEach(feature => {
             const li = document.createElement('li');
-            li.textContent = note;
-            notesUl.appendChild(li);
+            li.textContent = feature;
+            featuresUl.appendChild(li);
         });
     }
 
@@ -293,10 +354,14 @@
     updateLanguage();
 </script>
 
-<!-- NOT: Kendi notlarını eklemek için:
-     1. Yukarıdaki <ul class="notes-list"> içindeki <li>leri değiştir
-     2. Dil desteği için translations kısmındaki 'notesList' arraylerini değiştir
-     3. SHA256 kodunu .sha divinin içine yapıştır
-     Kolay gelsin! -->
+<!-- 
+    ArchiveOS Lite v27 - Debian 13 tabanlı
+    - Minimum RAM: 4GB (kullanım ~1.5GB)
+    - Masaüstü: KDE Plasma
+    - Sadece UEFI destekler, BIOS'ta AÇILMAZ!
+    - Yeşil tema
+    ISO linki hazır olunca download-btn'in href'ini güncelle
+    SHA256 hazır olunca sha div'ini güncelle
+-->
 </body>
 </html>
