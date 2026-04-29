@@ -24,7 +24,6 @@
         body {
             font-family: 'Ubuntu', sans-serif;
             color: white;
-            /* Derin mavi gradyan */
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             background-attachment: fixed;
             min-height: 100vh;
@@ -33,7 +32,6 @@
             align-items: center;
         }
 
-        /* NAVBAR - Daha Geniş */
         nav {
             width: 100%;
             display: flex;
@@ -50,21 +48,31 @@
         .nav-controls {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 20px;
         }
 
-        .links a {
-            margin-left: 40px;
-            text-decoration: none;
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 40px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
             color: white;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: 0.3s;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: 'Ubuntu', monospace;
+            backdrop-filter: blur(4px);
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .links a:hover { color: var(--accent-blue); }
+        .nav-btn:hover {
+            background: var(--accent-blue);
+            color: #0a0a2a;
+            border-color: transparent;
+        }
 
-        /* Dil seçici butonu */
         .lang-switch {
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.25);
@@ -85,7 +93,6 @@
             border-color: transparent;
         }
 
-        /* ANA İÇERİK - Tam Ortalanmış */
         .container {
             flex: 1;
             display: flex;
@@ -113,7 +120,6 @@
             font-weight: 300;
         }
 
-        /* ANA KART (Kocaman ve Şık) */
         .main-card {
             background: var(--card-bg);
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -138,7 +144,6 @@
             color: #e0e0e0;
         }
 
-        /* BUTONLAR - Daha Büyük */
         .btn-group {
             display: flex;
             gap: 20px;
@@ -177,7 +182,6 @@
             transform: translateY(-3px);
         }
 
-        /* ÖZELLİKLER - Alt Kısım */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -210,30 +214,18 @@
             line-height: 1.5;
         }
 
-        /* SHA BİLGİSİ */
-        .sha-text {
-            margin-top: 40px;
-            font-family: 'Courier New', Courier, monospace;
-            background: rgba(0,0,0,0.4);
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            color: #888;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* MOBİL AYARLAR */
         @media (max-width: 600px) {
             .main-card { padding: 30px; }
             h1 { font-size: 3rem; }
             .btn { width: 100%; }
-            .nav-controls { gap: 15px; }
-            .links a { margin-left: 20px; }
+            .nav-controls { gap: 10px; }
+            .nav-btn { padding: 6px 12px; font-size: 0.75rem; }
+            .lang-switch { padding: 6px 12px; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -245,30 +237,27 @@
         <img src="archiveos1.png" alt="ArchiveOS">
     </div>
     <div class="nav-controls">
-        <div class="links">
-            <a href="https://github.com/archiveos-classic">GitHub</a>
-        </div>
+        <a href="https://github.com/archiveos-classic" class="nav-btn">GitHub</a>
+        <a href="lite.html" class="nav-btn">🍃 ArchiveOS Lite</a>
+        <a href="index2.html" class="nav-btn">💙 Blue Archive</a>
         <button class="lang-switch" id="langToggleBtn">Türkçe'ye Geç</button>
     </div>
 </nav>
 
 <div class="container">
-    <!-- Dinamik değişen kısımlar data-i18n ile işaretlenmiştir -->
     <h1 data-i18n="title">ArchiveOS</h1>
     <p class="subtitle" data-i18n="subtitle">Simple. Fast. Modern. Free Linux Experience.</p>
 
     <div class="main-card">
-        <h2 data-i18n="card_title">ArchiveOS Classic v27.1</h2>
+        <h2 data-i18n="card_title">ArchiveOS Classic v28</h2>
         <p data-i18n="card_desc">
-            Experience the operating system of the future today. 
-            ArchiveOS awaits you with its performance-optimized kernel and fluid interface.
-            <br><br>
-            <strong style="color: #ff4d4d; font-size: 0.9rem;" data-i18n="uefi_warning">⚠️ Supports UEFI systems only.</strong>
+            Geleceğin işletim sistemini bugünden deneyimleyin.
+            Hız, güvenlik ve şıklığı bir arada sunan ArchiveOS ile tanışın.
+            Yenilikçi arayüzü ve optimize edilmiş yapısıyla işletim sisteminizi ileri taşıyın.
         </p>
 
         <div class="btn-group">
-            <a href="surum-notlari.html" class="btn btn-primary" data-i18n="download_btn">Download ISO Now</a>
-            <a href="index2.html" class="btn btn-secondary" data-i18n="blue_btn">Blue Archive Edition</a>
+            <a href="surum-notlari.html" class="btn btn-primary" data-i18n="download_btn">ISO İndir</a>
         </div>
     </div>
 
@@ -289,73 +278,57 @@
 </div>
 
 <script>
-    // Dil tanımları: varsayılan İngilizce (en), diğer Türkçe (tr)
     const translations = {
         en: {
             title: "ArchiveOS",
             subtitle: "Simple. Fast. Modern. Free Linux Experience.",
-            card_title: "ArchiveOS v28",
-            card_desc: `Experience the world of the future today.
-            Optimized for performance and with a fluid interface, ArchiveOS awaits you.
-            <br><br>
-            <strong style="color: #ff4d4d; font-size: 0.9rem;"></strong>`,
+            card_title: "ArchiveOS Classic v28",
+            card_desc: `Experience the operating system of the future today.
+            Meet ArchiveOS, which combines speed, security and elegance.
+            Take your operating system further with its innovative interface and optimized structure.`,
             download_btn: "Download ISO",
-            blue_btn: "Blue Archive Edition",
             feature1_title: "High Performance ⚡",
             feature1_desc: "Minimal resource usage ensures maximum power for gaming and workloads.",
             feature2_title: "Liquid Glass 💦",
             feature2_desc: "Modern visuals with eye-friendly, smooth animations and transparent layers.",
             feature3_title: "Total Security 🛡️",
-            feature3_desc: "With a built-in firewall and one-click system restore features, your connections are protected, and you also get a security package with the Ubuntu base.",
-            uefi_warning: "",
-            toggle_btn_text: "Türkçe'ye Geç" // buton yazısı İngilizce modda
+            feature3_desc: "Built-in firewall and one-click system restore protect your data.",
+            toggle_btn_text: "Türkçe'ye Geç"
         },
         tr: {
             title: "ArchiveOS",
             subtitle: "Sade. Hızlı. Modern. Özgür Linux Deneyimi.",
-            card_title: "ArchiveOS v28",
+            card_title: "ArchiveOS Classic v28",
             card_desc: `Geleceğin işletim sistemini bugünden deneyimleyin.
-            performans için optimize edilmiş ve
-            akıcı arayüzü ile ArchiveOS sizi bekliyor.
-            <br><br>
-            <strong style="color: #ff4d4d; font-size: 0.9rem;"></strong>`,
+            Hız, güvenlik ve şıklığı bir arada sunan ArchiveOS ile tanışın.
+            Yenilikçi arayüzü ve optimize edilmiş yapısıyla işletim sisteminizi ileri taşıyın.`,
             download_btn: "ISO İndir",
-            blue_btn: "Blue Archive Edition",
             feature1_title: "Yüksek Performans ⚡",
             feature1_desc: "Sistem kaynaklarını minimumda kullanarak oyun ve iş yüklerinizde tam güç sağlar.",
             feature2_title: "Liquid Glass 💦",
             feature2_desc: "Göz yormayan, pürüzsüz animasyonlar ve şeffaf katmanlarla modern bir görünüm.",
             feature3_title: "Tam Güvenlik 🛡️",
-            feature3_desc: "Dahili güvenlik duvarı ve tek tıkla sistem geri yükleme özellikleri ile verileriniz koruma altında ayrıca Ubuntu taban ile güvenlik güncellemesi almakta.",
-            uefi_warning: "",
+            feature3_desc: "Dahili güvenlik duvarı ve tek tıkla sistem geri yükleme özellikleri ile verileriniz koruma altında.",
             toggle_btn_text: "Switch to English"
         }
     };
 
-    let currentLang = 'en';   // varsayılan İngilizce
+    let currentLang = 'en';
 
-    // DOM elementlerini güncelleme (metin, innerHTML ve özel alanlar)
     function updateLanguage(lang) {
         const t = translations[lang];
         if (!t) return;
 
-        // Tekil data-i18n attribute'u olan elemanlar: innerHTML (ve textContent düzgün)
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (t[key] !== undefined) {
-                // Eğer içinde HTML etiketi varsa (örneğin card_desc'te strong vs.) innerHTML kullan.
-                // Çoğu metin düz olsa da güvenli şekilde innerHTML 
-                // (tasarımda ekstra etiket yok, ama card_desc içinde <br><strong> var)
                 el.innerHTML = t[key];
             }
         });
 
-        // Özel durum: özellik kutularındaki h3 ve p'ler farklı anahtarlar içeriyor.
-        // data-i18n-attrs ile birden çok özelliği güncelleme.
         document.querySelectorAll('[data-i18n-attrs]').forEach(el => {
             const mapDef = el.getAttribute('data-i18n-attrs');
             if (mapDef) {
-                // mapDef örnek: {"h3":"feature1_title","p":"feature1_desc"}
                 try {
                     const mapping = JSON.parse(mapDef);
                     for (const [selector, key] of Object.entries(mapping)) {
@@ -363,10 +336,6 @@
                             const targetEl = el.querySelector(selector);
                             if (targetEl) {
                                 targetEl.innerHTML = t[key];
-                            } else {
-                                // eğer direkt elementin kendisi ise? (bu durumda mapping h3 için kullanılmış)
-                                if (selector === 'h3' && el.tagName === 'H3') el.innerHTML = t[key];
-                                if (selector === 'p' && el.tagName === 'P') el.innerHTML = t[key];
                             }
                         }
                     }
@@ -374,20 +343,12 @@
             }
         });
 
-        // BUTON metni (Türkçe/İngilizce toggle) için ekstra özel ayar
         const toggleBtn = document.getElementById('langToggleBtn');
         if (toggleBtn) {
             toggleBtn.textContent = t.toggle_btn_text;
         }
-
-        // Ayrıca card_desc içinde bulunan uyarı zaten data-i18n="card_desc" ile güncelleniyor
-        // ancak ekstra strong kısmı için uyarı yazısı yukarıdaki içerik sayesinde çalışır.
-        // böylece 'uefi_warning' ayrıca gerekmez, ama ikinci bir emniyet: 
-        // eğer card_desc içinde doğru gelmiyorsa diye elle değiştirmeye gerek yok.
-        // Tasarım bozulmadan eksiksiz.
     }
 
-    // Dil değiştir + localStorage tercihi kaydet
     function setLanguage(lang) {
         if (lang !== 'en' && lang !== 'tr') return;
         currentLang = lang;
@@ -395,24 +356,20 @@
         localStorage.setItem('archiveos_lang', currentLang);
     }
 
-    // Toggle fonksiyonu: EN <-> TR
     function toggleLanguage() {
         const newLang = currentLang === 'en' ? 'tr' : 'en';
         setLanguage(newLang);
     }
 
-    // Dil tercihini yükle
     function loadUserLangPreference() {
         const savedLang = localStorage.getItem('archiveos_lang');
         if (savedLang === 'en' || savedLang === 'tr') {
             setLanguage(savedLang);
         } else {
-            // varsayılan İngilizce
             setLanguage('en');
         }
     }
 
-    // sayfa yüklendiğinde çalıştır ve buton dinleyicisi ekle
     document.addEventListener('DOMContentLoaded', () => {
         loadUserLangPreference();
 
